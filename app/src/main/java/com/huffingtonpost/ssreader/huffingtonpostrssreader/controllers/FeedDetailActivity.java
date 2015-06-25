@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 /**
  * An activity representing a single Feed detail screen. This
@@ -18,6 +23,8 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
  * more than a {@link FeedDetailFragment}.
  */
 public class FeedDetailActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,11 @@ public class FeedDetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.feed_detail_container, fragment)
                     .commit();
+
+
         }
+
+
     }
 
     @Override
