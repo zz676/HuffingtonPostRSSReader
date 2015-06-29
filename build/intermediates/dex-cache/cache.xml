@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jar="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-443c2f49b4e7dcaf0caa13151722ee93a1bcb986.jar" />
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\classes-6aa01b975169004774aff4c6b37be8a6f1c03db7.jar" />
     </item>
     <item
         jar="C:\Users\Zhisheng\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
@@ -16,13 +16,6 @@
         <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-d7323c20e5794989e421d0ec10204c2d60ef7b47.jar" />
     </item>
     <item
-        jar="C:\Users\Zhisheng\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
-        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\okio-1.4.0-7acaba2bc5bdbcb8f99e999ba63561698fcc1095.jar" />
-    </item>
-    <item
         jar="C:\Users\Zhisheng\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -30,18 +23,25 @@
         <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\okhttp-2.4.0-5f283a04518b6eaa48159e3af234beb753043bfd.jar" />
     </item>
     <item
-        jar="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\classes-6aa01b975169004774aff4c6b37be8a6f1c03db7.jar" />
-    </item>
-    <item
         jar="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
         <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\classes-d7aaa34b70f827fb62bf09c7048285cec2f001c4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zhisheng\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\okio-1.4.0-7acaba2bc5bdbcb8f99e999ba63561698fcc1095.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-443c2f49b4e7dcaf0caa13151722ee93a1bcb986.jar" />
     </item>
 
 </items>

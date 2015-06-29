@@ -1,4 +1,4 @@
-package com.huffingtonpost.ssreader.huffingtonpostrssreader.Helper;
+package com.huffingtonpost.ssreader.huffingtonpostrssreader.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

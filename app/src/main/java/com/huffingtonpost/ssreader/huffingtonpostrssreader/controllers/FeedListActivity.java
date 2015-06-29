@@ -1,18 +1,10 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Feed;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import java.io.IOException;
-
 
 /**
  * An activity representing a list of Feeds. This activity
@@ -32,14 +24,6 @@ import java.io.IOException;
  */
 public class FeedListActivity extends FragmentActivity
         implements FeedListFragment.Callbacks {
-
-    //private static final String  URL = "https://itunes.apple.com/us/rss/topgrossingapplications/limit=50/json";
-    //private static final String  URL = "http://www.huffingtonpost.com/feeds/index.xml";
-    private static final String  URL = "http://feeds.contenthub.aol.com/syndication/2.0/feed/557ef73a1f117";
-
-
-
-
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -65,7 +49,7 @@ public class FeedListActivity extends FragmentActivity
                     .setActivateOnItemClick(true);
         }
 
-        new RetrieveFeedTask().execute(URL);
+        //new RetrieveFeedTask().execute(URL);
 
 
         // TODO: If exposing deep links into your app, handle intents here.
@@ -95,43 +79,6 @@ public class FeedListActivity extends FragmentActivity
             Intent detailIntent = new Intent(this, FeedDetailActivity.class);
             detailIntent.putExtra(FeedDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
-        }
-    }
-
-    class RetrieveFeedTask extends AsyncTask<String, Void, Feed> {
-
-        private Exception exception;
-
-        OkHttpClient client = new OkHttpClient();
-
-        String run(String url) throws IOException {
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }
-
-
-
-        protected Feed doInBackground(String... urls) {
-            android.os.Debug.waitForDebugger();
-
-            String response = null;
-            try {
-                response = run(urls[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println(response);
-
-            return null;
-        }
-
-        protected void onPostExecute(Feed feed) {
-            // TODO: check this.exception
-            // TODO: do something with the feed
         }
     }
 }

@@ -1,13 +1,29 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.RecyclerAdapter;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Item;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A list fragment representing a list of Feeds. This fragment
@@ -19,6 +35,8 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
  * interface.
  */
 public class FeedListFragment extends ListFragment {
+
+    private static final String  URL = "http://feeds.huffingtonpost.com/c/35496/f/677097/index.rss";
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -36,6 +54,10 @@ public class FeedListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    private List<Item> items = new ArrayList<Item>();
+
+    private RecyclerView mRecyclerView;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -69,13 +91,15 @@ public class FeedListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.items_recycler_view, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.items_recycler_view);
+        RecyclerAdapter rAdapter = new RecyclerAdapter(getActivity(), items);
+        mRecyclerView.setAdapter(rAdapter);
+        return rootView;
     }
 
     @Override
@@ -107,6 +131,7 @@ public class FeedListFragment extends ListFragment {
 
         // Reset the active callbacks interface to the dummy implementation.
         mCallbacks = sDummyCallbacks;
+
     }
 
     @Override
@@ -131,6 +156,7 @@ public class FeedListFragment extends ListFragment {
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
      */
+
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
@@ -148,4 +174,43 @@ public class FeedListFragment extends ListFragment {
 
         mActivatedPosition = position;
     }
+
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, Item> {
+
+        private Exception exception;
+
+        OkHttpClient client = new OkHttpClient();
+
+        String run(String url) throws IOException {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
+
+
+
+        protected Item doInBackground(String... urls) {
+            android.os.Debug.waitForDebugger();
+
+            String response = null;
+            try {
+                response = run(urls[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(response);
+
+            return null;
+        }
+
+        protected void onPostExecute(Item item) {
+            // TODO: check this.exception
+            // TODO: do something with the feed
+        }
+    }
+
 }
