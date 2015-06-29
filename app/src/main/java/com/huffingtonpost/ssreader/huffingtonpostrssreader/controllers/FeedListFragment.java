@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,20 @@ import android.widget.TextView;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.RecyclerAdapter;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Channel;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Item;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssFeed;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.XMLParser;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.xml.sax.SAXException;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +46,9 @@ import java.util.List;
  */
 public class FeedListFragment extends ListFragment {
 
-    private static final String  URL = "http://feeds.huffingtonpost.com/c/35496/f/677097/index.rss";
+    private static final String URL = "http://www.huffingtonpost.com/feeds/index.xml";
+
+    private static final String TAG = "RetrieveFeedTask";
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -58,6 +70,8 @@ public class FeedListFragment extends ListFragment {
     private List<Item> items = new ArrayList<Item>();
 
     private RecyclerView mRecyclerView;
+    private RecyclerAdapter rAdapter;
+    private Channel channel;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -96,9 +110,11 @@ public class FeedListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.items_recycler_view, container, false);
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.items_recycler_view);
-        RecyclerAdapter rAdapter = new RecyclerAdapter(getActivity(), items);
-        mRecyclerView.setAdapter(rAdapter);
+
+        new RetrieveFeedTask().execute(URL);
         return rootView;
     }
 
@@ -176,9 +192,10 @@ public class FeedListFragment extends ListFragment {
     }
 
 
-    class RetrieveFeedTask extends AsyncTask<String, Void, Item> {
+    class RetrieveFeedTask extends AsyncTask<String, Void, Integer> {
 
         private Exception exception;
+        private Response response;
 
         OkHttpClient client = new OkHttpClient();
 
@@ -186,30 +203,45 @@ public class FeedListFragment extends ListFragment {
             Request request = new Request.Builder()
                     .url(url)
                     .build();
-
-            Response response = client.newCall(request).execute();
+            response = client.newCall(request).execute();
             return response.body().string();
         }
 
+        @Override
+        protected void onPreExecute() {
 
+        }
 
-        protected Item doInBackground(String... urls) {
+        protected Integer doInBackground(String... urls) {
             android.os.Debug.waitForDebugger();
 
             String response = null;
+            XMLParser parser = new XMLParser();
+
             try {
                 response = run(urls[0]);
+                InputStream stream = new ByteArrayInputStream(response.getBytes("UTF-8"));
+                RssFeed rssFeed = RssReader.read(stream);
+                String x = "";
+                //channel = parser.parse(response);
             } catch (IOException e) {
                 e.printStackTrace();
+                return 0;
+            } catch (SAXException e) {
+                e.printStackTrace();
+                return 0;
             }
             System.out.println(response);
-
-            return null;
+            return 1;
         }
 
-        protected void onPostExecute(Item item) {
-            // TODO: check this.exception
-            // TODO: do something with the feed
+        protected void onPostExecute(Integer result) {
+            if (result == 1) {
+                rAdapter = new RecyclerAdapter(getActivity(), items);
+                mRecyclerView.setAdapter(rAdapter);
+            } else {
+                Log.e(TAG, "Failed to fetch data!");
+            }
         }
     }
 

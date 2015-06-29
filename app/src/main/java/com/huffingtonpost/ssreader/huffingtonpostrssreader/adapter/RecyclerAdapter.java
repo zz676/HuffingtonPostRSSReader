@@ -50,10 +50,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         final Item item = items.get(position);
         holder.mTitle.setText(item.getTitle());
         holder.mDate.setText(item.getPubDate());
-        if (item.getImageUrls().size() > 0) {
+/*        if (item.getImageUrls().size() > 0) {
             Uri uri = Uri.parse(item.getImageUrls().get(0));
             holder.mImage.setImageURI(uri);
-        }
+        }*/
     }
 
     // Return the size of your dataset (invoked by the layout manager)
