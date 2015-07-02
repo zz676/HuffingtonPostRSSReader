@@ -18,16 +18,20 @@ import java.util.UUID;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Log
-    private static final String TAG = "DatabaseHelper";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-    // Database Version
     private static final int DATABASE_VERSION = 1;
-
-    // Database Name
+    /**
+     * Log tag
+     */
+    private static final String TAG = "DatabaseHelper";
+    /**
+     * Database Name
+     */
     private static final String DATABASE_NAME = "HuffingtonPostRSSReader";
 
-    // Table Names
+    /**
+     * Table Name
+     */
     public static final String TABLE_FAVORITE_FEEDS = "Favorite_Feeds";
 
     //CLAIMS TABLE- COLUMN NAMES

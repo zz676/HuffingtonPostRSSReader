@@ -22,49 +22,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed854e5b-9751-4eec-892b-53af40649099" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_favorite_border_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_favorite_border_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_favorite_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_favorite_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/info.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/un_favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/un_favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/un_favorite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/fee_detail_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
-      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\java\com\huffingtonpost\ssreader\huffingtonpostrssreader\adapter\RecyclerAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\java\com\huffingtonpost\ssreader\huffingtonpostrssreader\dummy\DummyContent.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\layout\custom_recyclerview_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\layout\items_recycler_view.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\layout-sw600dp\activity_feed_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-sw720dp/activity_feed_list.xml" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\android\drawable-xxxhdpi\ic_favorite_border_white_24dp.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\ios\ic_favorite_border_white.imageset\Contents.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\ios\ic_favorite_border_white.imageset\ic_favorite_border_white.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\ios\ic_favorite_border_white.imageset\ic_favorite_border_white_2x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\ios\ic_favorite_border_white.imageset\ic_favorite_border_white_3x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\web\ic_favorite_border_white_24dp_1x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_border_white_24dp\web\ic_favorite_border_white_24dp_2x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\android\drawable-xxxhdpi\ic_favorite_white_24dp.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\ios\ic_favorite_white.imageset\Contents.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\ios\ic_favorite_white.imageset\ic_favorite_white.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\ios\ic_favorite_white.imageset\ic_favorite_white_2x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\ios\ic_favorite_white.imageset\ic_favorite_white_3x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\web\ic_favorite_white_24dp_1x.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\res\ic_favorite_white_24dp\web\ic_favorite_white_24dp_2x.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java" />
       <change type="MODIFICATION" beforePath="C:\AndroidStudioProjects\HuffingtonPostRSSReader\app\src\main\java\com\huffingtonpost\ssreader\huffingtonpostrssreader\helper\DatabaseHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/helper/DatabaseHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/modules/RssFeed.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/modules/RssFeed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/modules/RssItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/modules/RssItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_feed_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_feed_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_22_2_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Huffington Post RSS Reader .iws" />
@@ -93,6 +73,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="CustomListAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FeedListFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -113,6 +103,32 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="items_listview.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.787879">
+              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_listview_item.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.23077">
+              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="RssHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/utilities/RssHandler.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,11 +142,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/helper/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.7">
-              <caret line="92" column="128" selection-start-line="92" selection-start-column="128" selection-end-line="92" selection-end-column="128" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -140,7 +156,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,29 +172,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_feed_detail.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_feed_detail.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.030303">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fee_detail_menu.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fee_detail_menu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1673,18 +1666,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/utilities/RssHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/modules/RssItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_feed_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_feed_list.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/fee_detail_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedDetailFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/helper/DatabaseHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml" />
       </list>
     </option>
   </component>
@@ -2937,7 +2930,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14913449" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.70439416" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.930759" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3009,7 +3002,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/helper/DatabaseHelper.java</url>
-          <line>92</line>
+          <line>96</line>
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
@@ -3313,17 +3306,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.818182">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/android/support/v4/app/FragmentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3368,25 +3350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30852994">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="10" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/view/MenuItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33271375">
@@ -3411,16 +3374,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3498,8 +3451,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/helper/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7">
-          <caret line="92" column="128" selection-start-line="92" selection-start-column="128" selection-end-line="92" selection-end-column="128" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/controllers/FeedListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/huffingtonpost/ssreader/huffingtonpostrssreader/adapter/CustomListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/items_listview.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.787879">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_listview_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.23077">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
           <folding />
         </state>
       </provider>

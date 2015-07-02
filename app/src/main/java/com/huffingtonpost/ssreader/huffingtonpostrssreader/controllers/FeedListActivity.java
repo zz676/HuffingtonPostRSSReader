@@ -114,7 +114,6 @@ public class FeedListActivity extends ActionBarActivity
                 return true;
             default:
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }

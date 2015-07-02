@@ -54,11 +54,13 @@ public class CustomListAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.custom_listview_item, null);
         holder = new ViewHolder();
         holder.mTitle = (TextView) convertView.findViewById(R.id.list_view_title);
-        //holder.mDate = (TextView) convertView.findViewById(R.id.list_view_date);
+        holder.mDate = (TextView) convertView.findViewById(R.id.list_view_date);
+        holder.mAuthor = (TextView) convertView.findViewById(R.id.list_view_author);
         //holder.mImage = (ImageView) convertView.findViewById(R.id.list_view_image);
 
         holder.mTitle.setText(items.get(position).getTitle());
-        //holder.mDate.setText(SIMPLEDATE.format(items.get(position).getPubDate()));
+        holder.mDate.setText(SIMPLEDATE.format(items.get(position).getPubDate()));
+        holder.mAuthor.setText(items.get(position).getAuthor());
         //viewHolder.mImage.setImageURI(items.get(position).getLink());
         convertView.setTag(holder);
         return convertView;
@@ -70,7 +72,8 @@ public class CustomListAdapter extends BaseAdapter {
     static class ViewHolder {
         // each data item is just a string in this case
         TextView mTitle;
-        //TextView mDate;
+        TextView mDate;
+        TextView mAuthor;
         //ImageView mImage;
     }
 }
