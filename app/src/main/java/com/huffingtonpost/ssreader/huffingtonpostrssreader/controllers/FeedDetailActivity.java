@@ -1,20 +1,36 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.CustomListAdapter;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseHelper;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.XMLParser;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.xml.sax.SAXException;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * An activity representing a single Feed detail screen. This
@@ -27,6 +43,7 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
  */
 public class FeedDetailActivity extends AppCompatActivity {
 
+    private final static String TAG = "FeedDetailActivity";
     private ShareActionProvider mShareActionProvider;
     private Intent mShareIntent;
     private DatabaseHelper dbHelper;
@@ -100,7 +117,7 @@ public class FeedDetailActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.favorite:
-                handleFavoriteOperation(item.getItemId());
+                new DatabaseTask().execute();
                 return true;
             case R.id.share:
                 Toast msxg = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);
@@ -111,20 +128,6 @@ public class FeedDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void handleFavoriteOperation(int menuId) {
-        if (dbHelper.isExisting(currentItem)) {
-            if (dbHelper.deleteFeed(currentItem)) {
-                menu.findItem(menuId).setIcon(R.drawable.un_favorite);
-            }
-        } else {
-            if (dbHelper.addNewFeed(currentItem)) {
-                Toast.makeText(this, "Added into favorites successfully.", Toast.LENGTH_LONG).show();
-                menu.findItem(menuId).setIcon(R.drawable.favorite);
-            }
-        }
-    }
-
 
     // Call to update the share intent
     private void setShareIntent(Intent shareIntent) {
@@ -144,5 +147,50 @@ public class FeedDetailActivity extends AppCompatActivity {
         ViewGroup view = (ViewGroup) getWindow().getDecorView();
         view.removeAllViews();
         super.finish();
+    }
+
+    class DatabaseTask extends AsyncTask<Void, Void, Integer> {
+
+        private String tyepOfOperation;
+        private boolean isSuccess = false;
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        protected Integer doInBackground(Void... args) {
+            //android.os.Debug.waitForDebugger();
+            try {
+                if (dbHelper.isExisting(currentItem)) {
+                    isSuccess = dbHelper.deleteFeed(currentItem);
+                    tyepOfOperation = "DELETE";
+                } else {
+                    isSuccess = dbHelper.addNewFeed(currentItem);
+                    tyepOfOperation = "INSERT";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+            }
+            return 1;
+        }
+
+        protected void onPostExecute(Integer result) {
+            //android.os.Debug.waitForDebugger();
+            if (result == 1) {
+                if (isSuccess) {
+                    switch (tyepOfOperation) {
+                        case "INSERT":
+                            Toast.makeText(getBaseContext(), "Added into favorites successfully.", Toast.LENGTH_LONG).show();
+                            menu.findItem(R.id.favorite).setIcon(R.drawable.favorite);
+                            break;
+                        case "DELETE":
+                            menu.findItem(R.id.favorite).setIcon(R.drawable.un_favorite);
+                            break;
+                    }
+                }
+            }
+        }
     }
 }

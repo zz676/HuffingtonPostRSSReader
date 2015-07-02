@@ -3,6 +3,7 @@
     package="com.huffingtonpost.ssreader.huffingtonpostrssreader" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +11,7 @@
         android:theme="@style/Theme.AppCompat" >
         <activity
             android:name=".controllers.FeedListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/list_activity_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +25,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controllers.FeedListActivity" />
+        </activity>
+        <activity
+            android:name=".controllers.FavoriteFeedsActivity"
+            android:label="@string/title_activity_favorite_feeds" >
         </activity>
     </application>
 

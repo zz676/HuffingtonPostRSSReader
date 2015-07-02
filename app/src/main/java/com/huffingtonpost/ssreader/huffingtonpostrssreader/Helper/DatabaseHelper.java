@@ -10,6 +10,7 @@ import android.util.Log;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -126,6 +127,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.e(TAG, e.getMessage());
         }
         return num > 0;
+    }
+
+    /**
+     * Get all the favorite feeds in the database
+     *
+     * @return a list of RssItem objects
+     */
+    public ArrayList<RssItem> getAllFavoriteFeeds() {
+
+        String selectQuery = "SELECT  * FROM " + TABLE_FAVORITE_FEEDS + "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        ArrayList<RssItem> items = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                RssItem item = new RssItem();
+                item.setGuid(cursor.getString(0));
+                item.setTitle(cursor.getString(1));
+                item.setPubDate(cursor.getString(2));
+                item.setAuthor(cursor.getString(3));
+                item.setLink(cursor.getString(4));
+                items.add(item);
+            } while (cursor.moveToNext());
+        }
+        return items;
     }
 
     @Override

@@ -5,7 +5,12 @@
         android:id="@+id/refresh"
         android:icon="@drawable/refresh"
         android:title="Refresh"
-    app:showAsAction="always" />
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/favoritefeeds"
+        android:icon="@drawable/favorite_feeds"
+        android:title="Favorite Feeds"
+        app:showAsAction="always" />
     <item
         android:id="@+id/About"
         android:icon="@drawable/info"

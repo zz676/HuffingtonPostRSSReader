@@ -3,7 +3,7 @@ package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +28,7 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
  * {@link FeedListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class FeedListActivity extends ActionBarActivity
+public class FeedListActivity extends AppCompatActivity
         implements FeedListFragment.Callbacks {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -50,12 +50,12 @@ public class FeedListActivity extends ActionBarActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-           // FeedListFragment feedListFragment  = ((FeedListFragment) getSupportFragmentManager().findFragmentById(R.id.list_item));
+            // FeedListFragment feedListFragment  = ((FeedListFragment) getSupportFragmentManager().findFragmentById(R.id.list_item));
             //feedListFragment.setActivateOnItemClick(true);
 
 
-            FragmentManager fragmentManager =  getSupportFragmentManager();
-            FeedListFragment feedListFragment = (FeedListFragment)fragmentManager.findFragmentById(R.id.feed_list);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FeedListFragment feedListFragment = (FeedListFragment) fragmentManager.findFragmentById(R.id.feed_list);
             feedListFragment.setActivateOnItemClick(true);
         }
 
@@ -91,10 +91,11 @@ public class FeedListActivity extends ActionBarActivity
             startActivity(detailIntent);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater=getMenuInflater();
+        MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
@@ -105,8 +106,11 @@ public class FeedListActivity extends ActionBarActivity
 
         switch (item.getItemId()) {
             case R.id.refresh:
-                Toast msg = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);
-                msg.show();
+                new FeedListFragment().refresh();
+                return true;
+            case R.id.favoritefeeds:
+                final Intent favpriteFeedsIntent = new Intent(this, FavoriteFeedsActivity.class);
+                startActivity(favpriteFeedsIntent);
                 return true;
             case R.id.info:
                 Toast msgx = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);

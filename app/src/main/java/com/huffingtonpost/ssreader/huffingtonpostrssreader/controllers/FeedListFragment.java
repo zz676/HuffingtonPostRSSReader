@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class FeedListFragment extends ListFragment {
 
-    private static final String URL = "http://www.huffingtonpost.com/feeds/index.xml";
+    protected static final String URL = "http://www.huffingtonpost.com/feeds/index.xml";
     private static final String SELECT_ITEM = "SELECTED_ITEM";
     private static final String TAG = "RetrieveFeedTask";
 
@@ -53,7 +53,7 @@ public class FeedListFragment extends ListFragment {
      * The fragment's current callback object, which is notified of list item
      * clicks.
      */
-    private Callbacks mCallbacks = sDummyCallbacks;
+    private Callbacks mCallbacks = sCallbacks;
 
     /**
      * The current activated item position. Only used on tablets.
@@ -82,7 +82,7 @@ public class FeedListFragment extends ListFragment {
      * A dummy implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
-    private static Callbacks sDummyCallbacks = new Callbacks() {
+    private static Callbacks sCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(RssItem item) {
         }
@@ -104,7 +104,7 @@ public class FeedListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.items_listview, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_feeds_listview, container, false);
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
@@ -139,7 +139,7 @@ public class FeedListFragment extends ListFragment {
         super.onDetach();
 
         // Reset the active callbacks interface to the dummy implementation.
-        mCallbacks = sDummyCallbacks;
+        mCallbacks = sCallbacks;
 
     }
 
@@ -177,6 +177,10 @@ public class FeedListFragment extends ListFragment {
             getListView().setItemChecked(position, true);
         }
         mActivatedPosition = position;
+    }
+
+    public void refresh(){
+        new RetrieveFeedTask().execute(URL);
     }
 
     class RetrieveFeedTask extends AsyncTask<String, Void, Integer> {
