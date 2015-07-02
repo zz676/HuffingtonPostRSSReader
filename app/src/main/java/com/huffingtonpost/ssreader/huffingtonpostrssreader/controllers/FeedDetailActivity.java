@@ -1,17 +1,20 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
-import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import java.io.IOException;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseHelper;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
 /**
  * An activity representing a single Feed detail screen. This
@@ -24,7 +27,11 @@ import java.io.IOException;
  */
 public class FeedDetailActivity extends AppCompatActivity {
 
-
+    private ShareActionProvider mShareActionProvider;
+    private Intent mShareIntent;
+    private DatabaseHelper dbHelper;
+    private RssItem currentItem;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +40,7 @@ public class FeedDetailActivity extends AppCompatActivity {
 
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        dbHelper = new DatabaseHelper(this);
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).
@@ -43,37 +50,99 @@ public class FeedDetailActivity extends AppCompatActivity {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
+        currentItem = (RssItem) getIntent().getSerializableExtra(FeedDetailFragment.SELECTED_ITEM);
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(FeedDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(FeedDetailFragment.ARG_ITEM_ID));
+            arguments.putSerializable(FeedDetailFragment.SELECTED_ITEM, currentItem);
             FeedDetailFragment fragment = new FeedDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.feed_detail_container, fragment)
                     .commit();
-
-
         }
+        if (currentItem != null) {
+            mShareIntent = new Intent();
+            mShareIntent.setAction(Intent.ACTION_SEND);
+            mShareIntent.setType("text/plain");
+            StringBuilder builder = new StringBuilder();
+            builder.append(currentItem.getTitle() + "\n");
+            builder.append(currentItem.getLink());
+            mShareIntent.putExtra(Intent.EXTRA_TEXT, builder.toString());
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.fee_detail_menu, menu);
+        // Locate MenuItem with ShareActionProvider
+        this.menu = menu;
+        setFavoriteStatus(menu);
+
+        MenuItem item = menu.findItem(R.id.share);
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareIntent(mShareIntent);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setFavoriteStatus(Menu menu) {
+        if (dbHelper.isExisting(currentItem)) {
+            menu.findItem(R.id.favorite).setIcon(R.drawable.favorite);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(new Intent(this, FeedListActivity.class));
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.favorite:
+                handleFavoriteOperation(item.getItemId());
+                return true;
+            case R.id.share:
+                Toast msxg = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);
+                msxg.show();
+                return true;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void handleFavoriteOperation(int menuId) {
+        if (dbHelper.isExisting(currentItem)) {
+            if (dbHelper.deleteFeed(currentItem)) {
+                menu.findItem(menuId).setIcon(R.drawable.un_favorite);
+            }
+        } else {
+            if (dbHelper.addNewFeed(currentItem)) {
+                Toast.makeText(this, "Added into favorites successfully.", Toast.LENGTH_LONG).show();
+                menu.findItem(menuId).setIcon(R.drawable.favorite);
+            }
+        }
+    }
+
+
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        setVisible(false);
+    }
+
+    @Override
+    public void finish() {
+        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.removeAllViews();
+        super.finish();
     }
 }

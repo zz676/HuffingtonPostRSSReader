@@ -4,23 +4,16 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.RecyclerAdapter;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Channel;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.Item;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.CustomListAdapter;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssFeed;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.XMLParser;
 import com.squareup.okhttp.OkHttpClient;
@@ -47,7 +40,7 @@ import java.util.List;
 public class FeedListFragment extends ListFragment {
 
     private static final String URL = "http://www.huffingtonpost.com/feeds/index.xml";
-
+    private static final String SELECT_ITEM = "SELECTED_ITEM";
     private static final String TAG = "RetrieveFeedTask";
 
     /**
@@ -67,11 +60,11 @@ public class FeedListFragment extends ListFragment {
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
-    private List<Item> items = new ArrayList<Item>();
+    private List<RssItem> items = new ArrayList<RssItem>();
 
-    private RecyclerView mRecyclerView;
-    private RecyclerAdapter rAdapter;
-    private Channel channel;
+    private CustomListAdapter listAdapter;
+    private RssFeed rssFeed;
+
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -82,7 +75,7 @@ public class FeedListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onItemSelected(RssItem item);
     }
 
     /**
@@ -91,7 +84,7 @@ public class FeedListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(RssItem item) {
         }
     };
 
@@ -104,17 +97,18 @@ public class FeedListFragment extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        new RetrieveFeedTask().execute(URL);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.items_recycler_view, container, false);
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.items_recycler_view);
-
-        new RetrieveFeedTask().execute(URL);
+        final View rootView = inflater.inflate(R.layout.items_listview, container, false);
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+        }
         return rootView;
     }
 
@@ -137,7 +131,6 @@ public class FeedListFragment extends ListFragment {
         if (!(activity instanceof Callbacks)) {
             throw new IllegalStateException("Activity must implement fragment's callbacks.");
         }
-
         mCallbacks = (Callbacks) activity;
     }
 
@@ -156,16 +149,15 @@ public class FeedListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(rssFeed.getRssItems().get(position));
     }
-
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         if (mActivatedPosition != ListView.INVALID_POSITION) {
-            // Serialize and persist the activated item position.
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+            savedInstanceState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     /**
@@ -176,21 +168,16 @@ public class FeedListFragment extends ListFragment {
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
-        getListView().setChoiceMode(activateOnItemClick
-                ? ListView.CHOICE_MODE_SINGLE
-                : ListView.CHOICE_MODE_NONE);
+        getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
     }
-
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {
             getListView().setItemChecked(position, true);
         }
-
         mActivatedPosition = position;
     }
-
 
     class RetrieveFeedTask extends AsyncTask<String, Void, Integer> {
 
@@ -213,7 +200,7 @@ public class FeedListFragment extends ListFragment {
         }
 
         protected Integer doInBackground(String... urls) {
-            android.os.Debug.waitForDebugger();
+            //android.os.Debug.waitForDebugger();
 
             String response = null;
             XMLParser parser = new XMLParser();
@@ -221,9 +208,7 @@ public class FeedListFragment extends ListFragment {
             try {
                 response = run(urls[0]);
                 InputStream stream = new ByteArrayInputStream(response.getBytes("UTF-8"));
-                RssFeed rssFeed = RssReader.read(stream);
-                String x = "";
-                //channel = parser.parse(response);
+                rssFeed = RssReader.read(stream);
             } catch (IOException e) {
                 e.printStackTrace();
                 return 0;
@@ -231,14 +216,15 @@ public class FeedListFragment extends ListFragment {
                 e.printStackTrace();
                 return 0;
             }
-            System.out.println(response);
             return 1;
         }
 
         protected void onPostExecute(Integer result) {
+           //android.os.Debug.waitForDebugger();
             if (result == 1) {
-                rAdapter = new RecyclerAdapter(getActivity(), items);
-                mRecyclerView.setAdapter(rAdapter);
+                listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems());
+                getListView().setAdapter(listAdapter);
+                //mListView.setAdapter(listAdapter);
             } else {
                 Log.e(TAG, "Failed to fetch data!");
             }

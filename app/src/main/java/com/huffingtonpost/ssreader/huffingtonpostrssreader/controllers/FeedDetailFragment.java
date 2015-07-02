@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
 /**
  * A fragment representing a single Feed detail screen.
@@ -17,16 +17,18 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.dummy.DummyContent;
  * on handsets.
  */
 public class FeedDetailFragment extends Fragment {
+
+    private static final String TAG = "FeedDetailFragment";
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String SELECTED_ITEM = "item_id";
 
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private RssItem rssItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,11 +41,11 @@ public class FeedDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey(SELECTED_ITEM)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            rssItem = (RssItem) getArguments().getSerializable(SELECTED_ITEM);
         }
     }
 
@@ -51,12 +53,25 @@ public class FeedDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_feed_detail, container, false);
-
+        rootView.setTag(TAG);
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.feed_detail)).setText(mItem.content);
+        if (rssItem != null) {
+            WebView webView = (WebView) rootView.findViewById(R.id.feed_detail);
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+            webView.loadUrl(rssItem.getLink());
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroy(){
+        ViewGroup view = (ViewGroup) getActivity().getWindow().getDecorView();
+        view.removeAllViews();
+        view.setVisibility(View.INVISIBLE);
+        //setVisible(false);
+        super.onDestroy();
     }
 }

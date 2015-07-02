@@ -16,6 +16,7 @@
 
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.modules;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,9 +26,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RssItem implements Comparable<RssItem>, Parcelable {
+public class RssItem implements Comparable<RssItem>, Serializable {
 
-    private RssFeed feed;
+    private transient RssFeed feed;
 
 
     private String guid;
@@ -41,49 +42,6 @@ public class RssItem implements Comparable<RssItem>, Parcelable {
 
     public RssItem() {
 
-    }
-
-    public RssItem(Parcel source) {
-
-        Bundle data = source.readBundle();
-        guid = data.getString("guid");
-        title = data.getString("title");
-        link = data.getString("link");
-        pubDate = (Date) data.getSerializable("pubDate");
-        author = data.getString("author");
-        description = data.getString("description");
-        enclosure = data.getString("enclosure");
-        feed = data.getParcelable("feed");
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        Bundle data = new Bundle();
-        data.putString("guid", guid);
-        data.putString("title", title);
-        data.putString("link", link);
-        data.putSerializable("pubDate", pubDate);
-        data.putString("author", author);
-        data.putString("description", description);
-        data.putString("enclosure", enclosure);
-        data.putParcelable("feed", feed);
-        dest.writeBundle(data);
-    }
-
-    public static final Creator<RssItem> CREATOR = new Creator<RssItem>() {
-        public RssItem createFromParcel(Parcel data) {
-            return new RssItem(data);
-        }
-
-        public RssItem[] newArray(int size) {
-            return new RssItem[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
 
@@ -160,9 +118,6 @@ public class RssItem implements Comparable<RssItem>, Parcelable {
         this.enclosure = enclosure;
     }
 
-    public static Creator<RssItem> getCREATOR() {
-        return CREATOR;
-    }
 
     @Override
     public int compareTo(RssItem another) {

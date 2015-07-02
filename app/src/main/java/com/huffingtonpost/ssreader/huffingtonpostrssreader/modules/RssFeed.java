@@ -22,85 +22,50 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RssFeed implements Parcelable {
+public class RssFeed {
 
-	private String title;
-	private String link;
-	private String description;
-	private ArrayList<RssItem> rssItems;
-	
-	public RssFeed() {
-		rssItems = new ArrayList<RssItem>();
-	}
-	
-	public RssFeed(Parcel source) {
-		
-		Bundle data = source.readBundle();
-		title = data.getString("title");
-		link = data.getString("link");
-		description = data.getString("description");
-		rssItems = data.getParcelableArrayList("rssItems");
-		
-	}
+    private String title;
+    private String link;
+    private String description;
+    private ArrayList<RssItem> rssItems;
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		
-		Bundle data = new Bundle();
-		data.putString("title", title);
-		data.putString("link", link);
-		data.putString("description", description);
-		data.putParcelableArrayList("rssItems", rssItems);
-		dest.writeBundle(data);
-	}
-	
-	public static final Creator<RssFeed> CREATOR = new Creator<RssFeed>() {
-		public RssFeed createFromParcel(Parcel data) {
-			return new RssFeed(data);
-		}
-		public RssFeed[] newArray(int size) {
-			return new RssFeed[size];
-		}
-	};
+    public RssFeed() {
+        rssItems = new ArrayList<RssItem>();
+    }
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-	
-	public void addRssItem(RssItem rssItem) {
-		rssItems.add(rssItem);
-	}
+    public void addRssItem(RssItem rssItem) {
+        rssItems.add(rssItem);
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getLink() {
-		return link;
-	}
+    public String getLink() {
+        return link;
+    }
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+    public void setLink(String link) {
+        this.link = link;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public ArrayList<RssItem> getRssItems() {
-		return rssItems;
-	}
+    public ArrayList<RssItem> getRssItems() {
+        return rssItems;
+    }
 
-	public void setRssItems(ArrayList<RssItem> rssItems) {
-		this.rssItems = rssItems;
-	} 
+    public void setRssItems(ArrayList<RssItem> rssItems) {
+        this.rssItems = rssItems;
+    }
 }
