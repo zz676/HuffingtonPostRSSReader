@@ -9,7 +9,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.Interfaces.MenuInterface;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseTask;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
 /**
@@ -35,6 +37,8 @@ public class FeedListActivity extends AppCompatActivity
      * device.
      */
     private boolean mTwoPane;
+    private Menu menu;
+    private RssItem currentItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +72,9 @@ public class FeedListActivity extends AppCompatActivity
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(FeedDetailFragment.SELECTED_ITEM, item);
-            FeedDetailFragment fragment = new FeedDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.feed_detail_container, fragment)
-                    .commit();
+            currentItem = item;
+            beginNewFragment(currentItem);
+
 
         } else {
             // In single-pane mode, simply start the detail activity
@@ -85,12 +85,28 @@ public class FeedListActivity extends AppCompatActivity
         }
     }
 
+    public void beginNewFragment(final RssItem item) {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(FeedDetailFragment.SELECTED_ITEM, item);
+        FeedDetailFragment fragment = new FeedDetailFragment();
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.feed_detail_container, fragment)
+                .commit();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-
+        this.menu = menu;
+        MenuItem item = menu.findItem(R.id.favorite);
+        if (mTwoPane) {
+            item.setVisible(true);
+        } else {
+            item.setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -98,12 +114,15 @@ public class FeedListActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.favorite:
+                new DatabaseTask(this, menu).execute(currentItem);
+                return true;
             case R.id.refresh:
                 new FeedListFragment().refresh();
                 return true;
             case R.id.favoritefeeds:
-                final Intent favpriteFeedsIntent = new Intent(this, FavoriteFeedsActivity.class);
-                startActivity(favpriteFeedsIntent);
+                final Intent favoriteFeedsIntent = new Intent(this, FavoriteFeedsActivity.class);
+                startActivity(favoriteFeedsIntent);
                 return true;
             case R.id.info:
                 Toast msgx = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);

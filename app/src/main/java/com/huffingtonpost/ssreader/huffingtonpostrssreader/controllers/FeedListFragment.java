@@ -74,11 +74,11 @@ public class FeedListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(RssItem item);
+        void onItemSelected(RssItem item);
     }
 
     /**
-     * A dummy implementation of the {@link Callbacks} interface that does
+     * A simple implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
     private static Callbacks sCallbacks = new Callbacks() {
@@ -150,6 +150,7 @@ public class FeedListFragment extends ListFragment {
         // fragment is attached to one) that an item has been selected.
         mCallbacks.onItemSelected(rssFeed.getRssItems().get(position));
     }
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -169,6 +170,7 @@ public class FeedListFragment extends ListFragment {
         // give items the 'activated' state when touched.
         getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
     }
+
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
@@ -178,19 +180,17 @@ public class FeedListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
-    public void isTwoPanel(){
+    public void isTwoPanel() {
         mTwoPane = true;
     }
 
-    public void refresh(){
+    public void refresh() {
         new RetrieveFeedTask().execute(URL);
     }
 
     class RetrieveFeedTask extends AsyncTask<String, Void, Integer> {
 
-        private Exception exception;
         private Response response;
-
         OkHttpClient client = new OkHttpClient();
 
         String run(String url) throws IOException {
@@ -225,15 +225,17 @@ public class FeedListFragment extends ListFragment {
         }
 
         protected void onPostExecute(Integer result) {
-           //android.os.Debug.waitForDebugger();
+            //android.os.Debug.waitForDebugger();
             if (result == 1) {
                 listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems(), mTwoPane);
                 getListView().setAdapter(listAdapter);
-                //mListView.setAdapter(listAdapter);
-            } else {
-                Log.e(TAG, "Failed to fetch data!");
+                if (mTwoPane) {
+                    FeedListActivity feedListActivity = (FeedListActivity) getActivity();
+                    feedListActivity.beginNewFragment(rssFeed.getRssItems().get(0));
+                } else {
+                    Log.e(TAG, "Failed to fetch data!");
+                }
             }
         }
     }
-
 }

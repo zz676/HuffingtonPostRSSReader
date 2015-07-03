@@ -2,6 +2,7 @@ package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,6 +36,10 @@ public class FeedDetailFragment extends Fragment {
      */
     private RssItem rssItem;
 
+    private WebView webView;
+
+    private View rootView;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -57,39 +62,42 @@ public class FeedDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_feed_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_feed_detail, container, false);
         rootView.setTag(TAG);
         if (rssItem != null) {
-            final Activity activity = getActivity();
-            final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "Loading...", true);
-            WebView webView = (WebView) rootView.findViewById(R.id.feed_detail);
-            webView.getSettings().setLoadWithOverviewMode(true);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setBuiltInZoomControls(true);
-            webView.setWebChromeClient(new WebChromeClient() {
-                public void onProgressChanged(WebView view, int progress) {
-                    // Activities and WebViews measure progress with different scales.
-                    // The progress meter will automatically disappear when we reach 100%
-                    activity.setProgress(progress * 1000);
-                }
-            });
-            webView.setWebViewClient(new WebViewClient() {
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                    Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
-                }
 
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    if (progressDialog.isShowing() && progressDialog != null) {
-                        progressDialog.dismiss();
-                    }
-                }
-            });
-
-            webView.loadUrl(rssItem.getLink());
+            loadFeed(rssItem, getActivity());
         }
-
         return rootView;
+    }
+
+    public void loadFeed(final RssItem item, final Context mContext) {
+        final ProgressDialog progressDialog = ProgressDialog.show(mContext, "", "Loading...", true);
+        final Activity activity = (Activity)mContext;
+        webView = (WebView) rootView.findViewById(R.id.feed_detail);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress) {
+                // Activities and WebViews measure progress with different scales.
+                // The progress meter will automatically disappear when we reach 100%
+                activity.setProgress(progress * 1000);
+            }
+        });
+        webView.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if (progressDialog.isShowing() && progressDialog != null) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
+        webView.loadUrl(item.getLink());
     }
 
 /*    @Override

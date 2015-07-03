@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseHelper;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseTask;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
 /**
@@ -26,7 +27,7 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link FeedDetailFragment}.
  */
-public class FeedDetailActivity extends AppCompatActivity {
+public class FeedDetailActivity extends AppCompatActivity{
 
     private final static String TAG = "FeedDetailActivity";
     private ShareActionProvider mShareActionProvider;
@@ -97,12 +98,17 @@ public class FeedDetailActivity extends AppCompatActivity {
         }
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.favorite:
-                new DatabaseTask().execute();
+                new DatabaseTask(this, menu).execute();
                 return true;
             case R.id.share:
                 Toast msxg = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);
@@ -132,50 +138,5 @@ public class FeedDetailActivity extends AppCompatActivity {
         ViewGroup view = (ViewGroup) getWindow().getDecorView();
         view.removeAllViews();
         super.finish();
-    }
-
-    class DatabaseTask extends AsyncTask<Void, Void, Integer> {
-
-        private String tyepOfOperation;
-        private boolean isSuccess = false;
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        protected Integer doInBackground(Void... args) {
-            //android.os.Debug.waitForDebugger();
-            try {
-                if (dbHelper.isExisting(currentItem)) {
-                    isSuccess = dbHelper.deleteFeed(currentItem);
-                    tyepOfOperation = "DELETE";
-                } else {
-                    isSuccess = dbHelper.addNewFeed(currentItem);
-                    tyepOfOperation = "INSERT";
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return 0;
-            }
-            return 1;
-        }
-
-        protected void onPostExecute(Integer result) {
-            //android.os.Debug.waitForDebugger();
-            if (result == 1) {
-                if (isSuccess) {
-                    switch (tyepOfOperation) {
-                        case "INSERT":
-                            Toast.makeText(getBaseContext(), "Added into favorites successfully.", Toast.LENGTH_LONG).show();
-                            menu.findItem(R.id.favorite).setIcon(R.drawable.favorite);
-                            break;
-                        case "DELETE":
-                            menu.findItem(R.id.favorite).setIcon(R.drawable.un_favorite);
-                            break;
-                    }
-                }
-            }
-        }
     }
 }
