@@ -8,6 +8,9 @@ import android.widget.Toast;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Zhisheng on 2015/7/2.
  */

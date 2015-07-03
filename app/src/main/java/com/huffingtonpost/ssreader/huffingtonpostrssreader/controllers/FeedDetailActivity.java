@@ -108,7 +108,7 @@ public class FeedDetailActivity extends AppCompatActivity{
 
         switch (item.getItemId()) {
             case R.id.favorite:
-                new DatabaseTask(this, menu).execute();
+                new DatabaseTask(this, menu).execute(currentItem);
                 return true;
             case R.id.share:
                 Toast msxg = Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG);

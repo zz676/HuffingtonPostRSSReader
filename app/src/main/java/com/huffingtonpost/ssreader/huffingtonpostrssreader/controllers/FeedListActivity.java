@@ -86,6 +86,7 @@ public class FeedListActivity extends AppCompatActivity
     }
 
     public void beginNewFragment(final RssItem item) {
+        currentItem = item;
         Bundle arguments = new Bundle();
         arguments.putSerializable(FeedDetailFragment.SELECTED_ITEM, item);
         FeedDetailFragment fragment = new FeedDetailFragment();
