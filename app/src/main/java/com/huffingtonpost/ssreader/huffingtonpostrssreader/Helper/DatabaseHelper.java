@@ -72,9 +72,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(KEY_FEED_ID, UUID.randomUUID().toString());
-            values.put(KEY_FEED_TITLE, item.getTitle().replace("'", "\"").toUpperCase());
+            values.put(KEY_FEED_TITLE, item.getTitle().replace("'", "\""));
             values.put(KEY_FEED_PDATE, dateFormat.format(item.getPubDate()));
-            values.put(KEY_FEED_AUTHOR, item.getAuthor().toUpperCase());
+            values.put(KEY_FEED_AUTHOR, item.getAuthor());
             values.put(KEY_FEED_LINK, item.getLink());
             db.insert(TABLE_FAVORITE_FEEDS, null, values);
             db.close();
@@ -95,7 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int deleted = 0;
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            deleted = db.delete(TABLE_FAVORITE_FEEDS, KEY_FEED_TITLE + " = '" + item.getTitle().replace("'", "\"").toUpperCase() + "'", null);
+            deleted = db.delete(TABLE_FAVORITE_FEEDS, KEY_FEED_TITLE + " = '" + item.getTitle().replace("'", "\"") + "'", null);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
@@ -112,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int num = 0;
         try {
             String selectQuery = "SELECT  count(*) FROM " + TABLE_FAVORITE_FEEDS + " where " + KEY_FEED_TITLE + " = '"
-                    + item.getTitle().replace("'", "\"").toUpperCase() + "' and " + KEY_FEED_AUTHOR + " = '" + item.getAuthor().toUpperCase() + "'";
+                    + item.getTitle().replace("'", "\"") + "' and " + KEY_FEED_AUTHOR + " = '" + item.getAuthor() + "'";
 
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);

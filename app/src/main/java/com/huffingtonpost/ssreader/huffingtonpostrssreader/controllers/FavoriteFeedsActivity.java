@@ -1,9 +1,9 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +29,6 @@ public class FavoriteFeedsActivity extends ListActivity {
     private CustomListAdapter favoriteFeedsListAdapter;
     private DatabaseHelper databaseHelper;
     private ArrayList<RssItem> favoriteFeeds;
-    private RssItem currentItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +50,9 @@ public class FavoriteFeedsActivity extends ListActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(item.getItemId() == R.id.back_to_home){
+            final Intent homeIntent = new Intent(this, FeedListActivity.class);
+            startActivity(homeIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -104,6 +101,7 @@ public class FavoriteFeedsActivity extends ListActivity {
             webView.loadUrl(item.getLink());
             feedDialog.setCancelable(true);
             feedDialog.show();
+            Toast.makeText(getApplication(), "Press BACK to exit full screen.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -129,7 +127,7 @@ public class FavoriteFeedsActivity extends ListActivity {
         @Override
         protected void onPostExecute(Void args) {
             //android.os.Debug.waitForDebugger();
-            favoriteFeedsListAdapter = new CustomListAdapter(getApplication(), favoriteFeeds);
+            favoriteFeedsListAdapter = new CustomListAdapter(getApplication(), favoriteFeeds, false);
             if(favoriteFeeds != null){
                 getListView().setAdapter(favoriteFeedsListAdapter);
             }

@@ -92,12 +92,12 @@ public class FeedDetailFragment extends Fragment {
         return rootView;
     }
 
-    @Override
+/*    @Override
     public void onDestroy() {
         ViewGroup view = (ViewGroup) getActivity().getWindow().getDecorView();
         view.removeAllViews();
         view.setVisibility(View.INVISIBLE);
         //setVisible(false);
         super.onDestroy();
-    }
+    }*/
 }

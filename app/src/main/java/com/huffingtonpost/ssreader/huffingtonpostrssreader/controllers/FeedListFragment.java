@@ -15,7 +15,6 @@ import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.CustomListAda
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssFeed;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.XMLParser;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -59,7 +58,7 @@ public class FeedListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
-
+    private boolean mTwoPane = false;
     private List<RssItem> items = new ArrayList<RssItem>();
 
     private CustomListAdapter listAdapter;
@@ -179,6 +178,10 @@ public class FeedListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
+    public void isTwoPanel(){
+        mTwoPane = true;
+    }
+
     public void refresh(){
         new RetrieveFeedTask().execute(URL);
     }
@@ -207,8 +210,6 @@ public class FeedListFragment extends ListFragment {
             //android.os.Debug.waitForDebugger();
 
             String response = null;
-            XMLParser parser = new XMLParser();
-
             try {
                 response = run(urls[0]);
                 InputStream stream = new ByteArrayInputStream(response.getBytes("UTF-8"));
@@ -226,7 +227,7 @@ public class FeedListFragment extends ListFragment {
         protected void onPostExecute(Integer result) {
            //android.os.Debug.waitForDebugger();
             if (result == 1) {
-                listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems());
+                listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems(), mTwoPane);
                 getListView().setAdapter(listAdapter);
                 //mListView.setAdapter(listAdapter);
             } else {

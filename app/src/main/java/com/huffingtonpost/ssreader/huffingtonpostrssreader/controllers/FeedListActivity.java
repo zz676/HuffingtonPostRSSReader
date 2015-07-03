@@ -50,18 +50,11 @@ public class FeedListActivity extends AppCompatActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            // FeedListFragment feedListFragment  = ((FeedListFragment) getSupportFragmentManager().findFragmentById(R.id.list_item));
-            //feedListFragment.setActivateOnItemClick(true);
-
-
             FragmentManager fragmentManager = getSupportFragmentManager();
             FeedListFragment feedListFragment = (FeedListFragment) fragmentManager.findFragmentById(R.id.feed_list);
             feedListFragment.setActivateOnItemClick(true);
+            feedListFragment.isTwoPanel();
         }
-
-        //new RetrieveFeedTask().execute(URL);
-
-
         // TODO: If exposing deep links into your app, handle intents here.
     }
 

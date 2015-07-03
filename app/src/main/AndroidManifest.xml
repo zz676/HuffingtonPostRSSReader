@@ -11,6 +11,7 @@
         android:theme="@style/Theme.AppCompat" >
         <activity
             android:name=".controllers.FeedListActivity"
+            android:icon="@drawable/huffpost"
             android:label="@string/list_activity_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,7 @@
         <activity
             android:name=".controllers.FeedDetailActivity"
             android:label="@string/title_feed_detail"
+            android:icon="@drawable/huffpost"
             android:parentActivityName=".controllers.FeedListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -28,6 +30,8 @@
         </activity>
         <activity
             android:name=".controllers.FavoriteFeedsActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+            android:icon="@drawable/huffpost"
             android:label="@string/title_activity_favorite_feeds" >
         </activity>
     </application>

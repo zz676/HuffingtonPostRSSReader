@@ -122,7 +122,8 @@ public class RssItem implements Comparable<RssItem>, Serializable {
     @Override
     public int compareTo(RssItem another) {
         if (getPubDate() != null && another.getPubDate() != null) {
-            return getPubDate().compareTo(another.getPubDate());
+            //return getPubDate().compareTo(another.getPubDate());
+            return another.getPubDate().compareTo(getPubDate());
         } else {
             return 0;
         }

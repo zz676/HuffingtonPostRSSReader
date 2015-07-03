@@ -1,6 +1,5 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
@@ -8,29 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.CustomListAdapter;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.DatabaseHelper;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
-import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.XMLParser;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import org.xml.sax.SAXException;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * An activity representing a single Feed detail screen. This

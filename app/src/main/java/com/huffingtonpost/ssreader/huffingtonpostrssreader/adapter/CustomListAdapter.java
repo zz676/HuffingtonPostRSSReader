@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
@@ -23,11 +24,13 @@ public class CustomListAdapter extends BaseAdapter {
     private Context mContext;
     private List<RssItem> items;
     private ViewHolder holder;
+    private boolean mTwoPane;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CustomListAdapter(Context context, List<RssItem> items) {
+    public CustomListAdapter(Context context, List<RssItem> items, boolean mTwoPane) {
         this.mContext = context;
         this.items = items;
+        this.mTwoPane = mTwoPane;
     }
 
     @Override
@@ -56,10 +59,14 @@ public class CustomListAdapter extends BaseAdapter {
         holder.mDate = (TextView) convertView.findViewById(R.id.list_view_date);
         holder.mAuthor = (TextView) convertView.findViewById(R.id.list_view_author);
         //holder.mImage = (ImageView) convertView.findViewById(R.id.list_view_image);
-
         holder.mTitle.setText(items.get(position).getTitle());
-        holder.mDate.setText(SIMPLEDATE.format(items.get(position).getPubDate()));
-        holder.mAuthor.setText(items.get(position).getAuthor());
+        if(!mTwoPane){
+            holder.mDate.setText(SIMPLEDATE.format(items.get(position).getPubDate()));
+            holder.mAuthor.setText(items.get(position).getAuthor());
+        } else {
+            LinearLayout linearLayout = (LinearLayout)convertView.findViewById(R.id.list_view_linearlayout);
+            linearLayout.removeAllViews();
+        }
         //viewHolder.mImage.setImageURI(items.get(position).getLink());
         convertView.setTag(holder);
         return convertView;
