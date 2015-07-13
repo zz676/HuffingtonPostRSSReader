@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.R;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.adapter.CustomListAdapter;
+import com.huffingtonpost.ssreader.huffingtonpostrssreader.helper.RetrieveFeedTask;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssFeed;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.modules.RssItem;
 import com.huffingtonpost.ssreader.huffingtonpostrssreader.utilities.RssReader;
@@ -60,9 +61,8 @@ public class FeedListFragment extends ListFragment {
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mTwoPane = false;
     private List<RssItem> items = new ArrayList<RssItem>();
-
-    private CustomListAdapter listAdapter;
     private RssFeed rssFeed;
+    private CustomListAdapter listAdapter;
 
 
     /**
@@ -98,7 +98,7 @@ public class FeedListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        new RetrieveFeedTask().execute(URL);
+        new RetrieveFeedTask(this).execute(URL);
     }
 
     @Override
@@ -185,57 +185,18 @@ public class FeedListFragment extends ListFragment {
     }
 
     public void refresh() {
-        new RetrieveFeedTask().execute(URL);
+        new RetrieveFeedTask(this).execute(URL);
     }
 
-    class RetrieveFeedTask extends AsyncTask<String, Void, Integer> {
-
-        private Response response;
-        OkHttpClient client = new OkHttpClient();
-
-        String run(String url) throws IOException {
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            response = client.newCall(request).execute();
-            return response.body().string();
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        protected Integer doInBackground(String... urls) {
-            //android.os.Debug.waitForDebugger();
-
-            String response = null;
-            try {
-                response = run(urls[0]);
-                InputStream stream = new ByteArrayInputStream(response.getBytes("UTF-8"));
-                rssFeed = RssReader.read(stream);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return 0;
-            } catch (SAXException e) {
-                e.printStackTrace();
-                return 0;
-            }
-            return 1;
-        }
-
-        protected void onPostExecute(Integer result) {
-            //android.os.Debug.waitForDebugger();
-            if (result == 1) {
-                listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems(), mTwoPane);
-                getListView().setAdapter(listAdapter);
-                if (mTwoPane) {
-                    FeedListActivity feedListActivity = (FeedListActivity) getActivity();
-                    feedListActivity.beginNewFragment(rssFeed.getRssItems().get(0));
-                } else {
-                    Log.e(TAG, "Failed to fetch data!");
-                }
-            }
+    public void updateUI(RssFeed rssFeed) {
+        this.rssFeed = rssFeed;
+        listAdapter = new CustomListAdapter(getActivity(), rssFeed.getRssItems(), mTwoPane);
+        getListView().setAdapter(listAdapter);
+        if (mTwoPane) {
+            FeedListActivity feedListActivity = (FeedListActivity) getActivity();
+            feedListActivity.beginNewFragment(rssFeed.getRssItems().get(0));
         }
     }
+
+
 }

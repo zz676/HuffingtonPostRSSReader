@@ -39,6 +39,8 @@ public class FeedListActivity extends AppCompatActivity
     private boolean mTwoPane;
     private Menu menu;
     private RssItem currentItem;
+    private FragmentManager fragmentManager;
+    private FeedListFragment feedListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,8 @@ public class FeedListActivity extends AppCompatActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FeedListFragment feedListFragment = (FeedListFragment) fragmentManager.findFragmentById(R.id.feed_list);
+            fragmentManager = getSupportFragmentManager();
+            feedListFragment = (FeedListFragment) fragmentManager.findFragmentById(R.id.feed_list);
             feedListFragment.setActivateOnItemClick(true);
             feedListFragment.isTwoPanel();
         }
@@ -119,7 +121,9 @@ public class FeedListActivity extends AppCompatActivity
                 new DatabaseTask(this, menu).execute(currentItem);
                 return true;
             case R.id.refresh:
-                new FeedListFragment().refresh();
+
+//                feedListFragment.refresh();
+                beginNewFragment(currentItem);
                 return true;
             case R.id.favoritefeeds:
                 final Intent favoriteFeedsIntent = new Intent(this, FavoriteFeedsActivity.class);

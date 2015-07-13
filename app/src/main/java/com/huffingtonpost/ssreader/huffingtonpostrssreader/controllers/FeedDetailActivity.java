@@ -1,7 +1,6 @@
 package com.huffingtonpost.ssreader.huffingtonpostrssreader.controllers;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
